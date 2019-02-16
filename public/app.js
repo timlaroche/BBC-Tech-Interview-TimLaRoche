@@ -21,25 +21,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
 	_inherits(App, _React$Component);
 
-	function App() {
+	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+		_this.state = {
+			currentIndex: 1,
+			showPrev: false
+		};
+		return _this;
 	}
 
 	_createClass(App, [{
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
-				'div',
+				_react2.default.Fragment,
 				null,
+				_react2.default.createElement(_content2.default, { articleURL: "http://localhost:3000/article-" + this.state.currentIndex }),
 				_react2.default.createElement(
-					'h1',
-					null,
-					' Article 1 '
+					'button',
+					{ onClick: function onClick(e) {
+							return _this2.nextArticle(e);
+						} },
+					' Next Article '
 				),
-				_react2.default.createElement(_content2.default, { articleURL: 'http://localhost:3000/article-1' })
+				this.state.showPrev != 0 && _react2.default.createElement(
+					'button',
+					null,
+					' Previous Article '
+				)
 			);
+		}
+	}, {
+		key: 'nextArticle',
+		value: function nextArticle(e) {
+			e.preventDefault();
+			console.log("button press");
+			this.setState({ currentIndex: this.state.currentIndex % 5 + 1 });
 		}
 	}]);
 

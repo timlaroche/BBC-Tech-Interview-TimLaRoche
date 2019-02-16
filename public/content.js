@@ -22,16 +22,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/*
-axios.get("http://localhost:3000/article-1").then(function (response){
-	console.log(response.data);
-	ReactDOM.render(
-		<h1> {response.data["title"]} </h1>,
-		document.getElementById('content')
-		);
-});
-*/
-
 var ArticleContent = function (_React$Component) {
 	_inherits(ArticleContent, _React$Component);
 
@@ -42,7 +32,8 @@ var ArticleContent = function (_React$Component) {
 
 		_this.state = {
 			isLoaded: false,
-			data: "hello"
+			title: "",
+			body: []
 		};
 		return _this;
 	}
@@ -50,24 +41,83 @@ var ArticleContent = function (_React$Component) {
 	_createClass(ArticleContent, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
+			this.getArticleContents();
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps, prevState) {
+			if (this.props.articleURL != prevProps.articleURL) {
+				this.getArticleContents();
+			}
+		}
+	}, {
+		key: 'getArticleContents',
+		value: function getArticleContents() {
 			var _this2 = this;
 
-			console.log("componentDidMount");
 			_axios2.default.get(this.props.articleURL).then(function (response) {
-				console.log(response.data["title"]);
-				var x = response.data;
-				_this2.setState({ data: x });
+				console.log(response.data);
+				_this2.setState({ title: response.data["title"], body: response.data["body"] });
 			});
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'p',
+				_react2.default.Fragment,
 				null,
-				' ',
-				this.state.data["title"],
-				' '
+				this.state.body.map(function (content) {
+					switch (content.type) {
+						case "heading":
+							return _react2.default.createElement(
+								'h2',
+								null,
+								' ',
+								content.model.text,
+								' '
+							);
+							break;
+						case "paragraph":
+							return _react2.default.createElement(
+								'p',
+								null,
+								' ',
+								content.model.text,
+								' '
+							);
+							break;
+						case "image":
+							console.log(content.model.url);
+							return _react2.default.createElement('img', { src: content.model.url });
+							break;
+						case "list":
+							if (content.model.type == "unordered") {
+								var items = content.model.items.map(function (item) {
+									return _react2.default.createElement(
+										'li',
+										null,
+										' ',
+										item,
+										' '
+									);
+								});
+								return _react2.default.createElement(
+									'ul',
+									null,
+									' ',
+									items,
+									' '
+								);
+							}
+							break;
+						default:
+							return _react2.default.createElement(
+								'p',
+								null,
+								' default '
+							);
+					}
+				})
 			);
 		}
 	}]);
