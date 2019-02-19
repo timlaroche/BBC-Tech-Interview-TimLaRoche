@@ -6,9 +6,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _content = require('./content');
 
 var _content2 = _interopRequireDefault(_content);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+var _rating = require('./rating');
+
+var _rating2 = _interopRequireDefault(_rating);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,33 +38,63 @@ var App = function (_React$Component) {
 
 		_this.state = {
 			currentIndex: 1,
-			showPrev: false
+			showPrev: false,
+			reading: false
 		};
 		return _this;
 	}
+	/* UNCOMMENT THIS FOR ACTUAL APP -> CURRENTLY TESTING RATING COMPONENT
+ render(){
+ 	const headerStyle = {display: "block", magin: "0 auto"}
+ 	if(this.state.reading === false){
+ 		return(
+ 			<React.Fragment>
+ 				<Container text>
+ 					<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center", "padding": '3em'}}> 
+ 						<img src="bbclogo.svg" alt="BBC"/> Article Ranker 
+ 					</Header>
+ 					<p> Welcome to the BBC Article Ranker. </p> 
+ 					<p>Please take your time to read the 5 articles you are presented and rank them at the end. </p>
+ 					<Button onClick={(e) => this.setState({reading: true}) }> Start </Button>
+ 				</Container>
+ 			</React.Fragment>
+ 			)
+ 	}
+ 	else{
+ 		return(
+ 			<React.Fragment>
+ 			<Grid verticalAlign='middle' style={{"padding": '3em'}} centered>
+ 				<Grid.Row>
+ 					<Grid.Column width={16}>
+ 						<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center"}}> 
+ 							<img src="bbclogo.svg" alt="BBC"/> Article Ranker 
+ 						</Header>
+ 					</Grid.Column>
+ 				</Grid.Row>
+ 					<Grid.Row>
+ 					<Grid.Column width={4}>
+ 						<Icon name="chevron left" />
+ 					</Grid.Column>
+ 					<Grid.Column width={8}>
+ 						<ArticleContent articleURL={"http://localhost:3000/article-"+this.state.currentIndex} />
+ 						<Button onClick={(e) => this.nextArticle(e)}> Next Article </Button>
+ 						{this.state.showPrev != 0 && <button> Previous Article </button>}
+ 					</Grid.Column>
+ 					<Grid.Column width={4}>
+ 						<Icon name="chevron right" />
+ 					</Grid.Column>
+ 				</Grid.Row>
+ 			</Grid>
+ 			</React.Fragment>
+ 		)
+ 	}
+ }
+ */
 
 	_createClass(App, [{
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
-
-			return _react2.default.createElement(
-				_react2.default.Fragment,
-				null,
-				_react2.default.createElement(_content2.default, { articleURL: "http://localhost:3000/article-" + this.state.currentIndex }),
-				_react2.default.createElement(
-					'button',
-					{ onClick: function onClick(e) {
-							return _this2.nextArticle(e);
-						} },
-					' Next Article '
-				),
-				this.state.showPrev != 0 && _react2.default.createElement(
-					'button',
-					null,
-					' Previous Article '
-				)
-			);
+			return _react2.default.createElement(_rating2.default, null);
 		}
 	}, {
 		key: 'nextArticle',
@@ -68,4 +108,4 @@ var App = function (_React$Component) {
 	return App;
 }(_react2.default.Component);
 
-ReactDOM.render(_react2.default.createElement(App, null), document.getElementById("content"));
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("content"));

@@ -14,6 +14,8 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _semanticUiReact = require('semantic-ui-react');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42,12 +44,15 @@ var ArticleContent = function (_React$Component) {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			this.getArticleContents();
+			this.setState({ isLoaded: true });
 		}
 	}, {
 		key: 'componentDidUpdate',
 		value: function componentDidUpdate(prevProps, prevState) {
 			if (this.props.articleURL != prevProps.articleURL) {
 				this.getArticleContents();
+				this.setState({ isLoaded: true });
+				window.scrollTo(0, 0);
 			}
 		}
 	}, {
@@ -63,62 +68,81 @@ var ArticleContent = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement(
-				_react2.default.Fragment,
-				null,
-				this.state.body.map(function (content) {
-					switch (content.type) {
-						case "heading":
-							return _react2.default.createElement(
-								'h2',
-								null,
-								' ',
-								content.model.text,
-								' '
-							);
-							break;
-						case "paragraph":
-							return _react2.default.createElement(
-								'p',
-								null,
-								' ',
-								content.model.text,
-								' '
-							);
-							break;
-						case "image":
-							console.log(content.model.url);
-							return _react2.default.createElement('img', { src: content.model.url });
-							break;
-						case "list":
-							if (content.model.type == "unordered") {
-								var items = content.model.items.map(function (item) {
-									return _react2.default.createElement(
-										'li',
-										null,
-										' ',
-										item,
-										' '
-									);
-								});
+			if (isLoaded) {
+				return _react2.default.createElement(
+					_react2.default.Fragment,
+					null,
+					this.state.body.map(function (content) {
+						switch (content.type) {
+							case "heading":
 								return _react2.default.createElement(
-									'ul',
-									null,
+									_semanticUiReact.Header,
+									{ as: 'h2' },
 									' ',
-									items,
+									content.model.text,
 									' '
 								);
-							}
-							break;
-						default:
-							return _react2.default.createElement(
-								'p',
-								null,
-								' default '
-							);
-					}
-				})
-			);
+								break;
+							case "paragraph":
+								return _react2.default.createElement(
+									'p',
+									null,
+									' ',
+									content.model.text,
+									' '
+								);
+								break;
+							case "image":
+								console.log(content.model.url);
+								return _react2.default.createElement('img', { src: content.model.url });
+								break;
+							case "list":
+								if (content.model.type == "unordered") {
+									var items = content.model.items.map(function (item) {
+										return _react2.default.createElement(
+											'li',
+											null,
+											' ',
+											item,
+											' '
+										);
+									});
+									return _react2.default.createElement(
+										'ul',
+										null,
+										' ',
+										items,
+										' '
+									);
+								}
+								break;
+							default:
+								return _react2.default.createElement(
+									'p',
+									null,
+									' default '
+								);
+						}
+					})
+				);
+			} else {
+				return _react2.default.createElement(
+					_react2.default.Fragment,
+					null,
+					_react2.default.createElement(
+						_semanticUiReact.Placeholder,
+						null,
+						_react2.default.createElement(
+							_semanticUiReact.Placeholder.Paragraph,
+							null,
+							_react2.default.createElement(_semanticUiReact.Placeholder.Line, null),
+							_react2.default.createElement(_semanticUiReact.Placeholder.Line, null),
+							_react2.default.createElement(_semanticUiReact.Placeholder.Line, null),
+							_react2.default.createElement(_semanticUiReact.Placeholder.Line, null)
+						)
+					)
+				);
+			}
 		}
 	}]);
 
