@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ArticleContent from './content'
 import { Button, Grid, Header, Icon, Container } from 'semantic-ui-react';
-import Rating from './rating';
+import RatingPage from './ratingpage';
+import ErrorBoundary from './errorboundary';
 
 class App extends React.Component {
 
@@ -14,63 +15,73 @@ class App extends React.Component {
 			reading: false
 		};
 	}
-	/* UNCOMMENT THIS FOR ACTUAL APP -> CURRENTLY TESTING RATING COMPONENT
+
 	render(){
 		const headerStyle = {display: "block", magin: "0 auto"}
+		const AppHeader = (<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center", "padding-top": '1.5em'}}> 
+							<img src="bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
+						</Header>);
+		// Initial starting page
 		if(this.state.reading === false){
 			return(
-				<React.Fragment>
-					<Container text>
-						<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center", "padding": '3em'}}> 
-							<img src="bbclogo.svg" alt="BBC"/> Article Ranker 
-						</Header>
-						<p> Welcome to the BBC Article Ranker. </p> 
-						<p>Please take your time to read the 5 articles you are presented and rank them at the end. </p>
-						<Button onClick={(e) => this.setState({reading: true}) }> Start </Button>
-					</Container>
-				</React.Fragment>
+				<ErrorBoundary>
+					<React.Fragment>
+						<Container text>
+							{AppHeader}
+							<div style={{"padding": "2em"}}>
+							<p> Welcome to Tim's BBC Article Ranker. </p> 
+							<p>Please take your time to read the 5 articles you are presented and rank them at the end. </p>
+							</div>
+							<Button onClick={(e) => this.setState({reading: true}) }> Start </Button>
+						</Container>
+					</React.Fragment>
+				</ErrorBoundary>
 				)
 		}
-		else{
+		// Rating page if we have read all the articles
+		if(this.state.currentIndex > 5){
 			return(
-				<React.Fragment>
-				<Grid verticalAlign='middle' style={{"padding": '3em'}} centered>
-					<Grid.Row>
-						<Grid.Column width={16}>
-							<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center"}}> 
-								<img src="bbclogo.svg" alt="BBC"/> Article Ranker 
-							</Header>
-						</Grid.Column>
-					</Grid.Row>
-
-					<Grid.Row>
-						<Grid.Column width={4}>
-							<Icon name="chevron left" />
-						</Grid.Column>
-						<Grid.Column width={8}>
-							<ArticleContent articleURL={"http://localhost:3000/article-"+this.state.currentIndex} />
-							<Button onClick={(e) => this.nextArticle(e)}> Next Article </Button>
-							{this.state.showPrev != 0 && <button> Previous Article </button>}
-						</Grid.Column>
-						<Grid.Column width={4}>
-							<Icon name="chevron right" />
-						</Grid.Column>
-					</Grid.Row>
-				</Grid>
-				</React.Fragment>
+				<ErrorBoundary>
+					{AppHeader}
+					<RatingPage />
+				</ErrorBoundary>
 			)
 		}
-	}
-	*/
 
-	render(){
-		return <Rating />;
+		// Otherwise display the articles
+		else{
+			return(
+				<ErrorBoundary>
+					<React.Fragment>
+					<Grid verticalAlign='middle' centered>
+						<Grid.Row>
+							<Grid.Column width={16}>
+								{AppHeader}
+							</Grid.Column>
+						</Grid.Row>
+						<Grid.Row>
+							<Grid.Column width={8}>
+								<ArticleContent style={{"padding-top": "-2em"}} 
+									articleURL={"http://localhost:3000/article-"+this.state.currentIndex} 
+								/>
+								<Button onClick={(e) => this.nextArticle(e)}> Next Article </Button>
+								{this.state.showPrev != 0 && <button> Previous Article </button>}
+							</Grid.Column>
+						</Grid.Row>
+					</Grid>
+					</React.Fragment>
+				</ErrorBoundary>
+			)
+		}
 	}
 
 	nextArticle(e){
 		e.preventDefault();
 		console.log("button press");
-		this.setState({currentIndex: (this.state.currentIndex % 5) + 1});
+		// The commented line of code below is used if you would like to circularly view the articles i.e. after Article 5, read Article 1.
+		//this.setState({currentIndex: (this.state.currentIndex % 5) + 1});
+		//Otherwise below...
+		this.setState({currentIndex: (this.state.currentIndex) + 1});
 	}
 
 }
