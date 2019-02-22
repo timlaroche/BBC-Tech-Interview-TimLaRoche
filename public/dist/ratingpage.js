@@ -34,6 +34,11 @@ var RatingPage = function (_React$Component) {
 	}
 
 	_createClass(RatingPage, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			window.scrollTo(0, 0);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(

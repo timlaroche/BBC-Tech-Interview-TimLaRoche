@@ -40,7 +40,8 @@ export default class ArticleContent extends React.Component {
 	render(){
 		if(this.state.isLoaded){
 			return(
-				<React.Fragment>
+				<div id="application">
+				<h1> {this.state.title} </h1>
 				{this.state.body.map((content) => {
 					switch(content.type){
 						case "heading":
@@ -57,10 +58,14 @@ export default class ArticleContent extends React.Component {
 									Not how I would like to do it!
 									Not a good practice!
 									*/}
-									<div style={{"height": content.model.height+"px", "width": "100%", 
+									<div style={{"height": content.model.height+"px", "width": content.model.width+"px", 
 										"background-color": "rgb(235,235,235)", "overflow":"hidden"
 									}}>
-										<Image style={{"display": "block"}} src={content.model.url+"?"+Math.random()} />
+										<Image 
+										style={{"display": "block", "height": content.model.height, "width": content.model.width}} 
+										src={content.model.url+"?"+Math.random()} 
+										alt={content.model.altText}
+										 />
 									</div>
 								</React.Fragment>
 							)
@@ -71,10 +76,10 @@ export default class ArticleContent extends React.Component {
 							}
 							break;
 						default:
-							return <p> default </p>
+							return <p> Unknown item in JSON.</p>
 					}
 				})}
-				</React.Fragment>
+				</div>
 			)
 		}
 		else{

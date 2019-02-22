@@ -73,8 +73,15 @@ var ArticleContent = function (_React$Component) {
 		value: function render() {
 			if (this.state.isLoaded) {
 				return _react2.default.createElement(
-					_react2.default.Fragment,
-					null,
+					'div',
+					{ id: 'application' },
+					_react2.default.createElement(
+						'h1',
+						null,
+						' ',
+						this.state.title,
+						' '
+					),
 					this.state.body.map(function (content) {
 						switch (content.type) {
 							case "heading":
@@ -101,10 +108,14 @@ var ArticleContent = function (_React$Component) {
 									null,
 									_react2.default.createElement(
 										'div',
-										{ style: { "height": content.model.height + "px", "width": "100%",
+										{ style: { "height": content.model.height + "px", "width": content.model.width + "px",
 												"background-color": "rgb(235,235,235)", "overflow": "hidden"
 											} },
-										_react2.default.createElement(_semanticUiReact.Image, { style: { "display": "block" }, src: content.model.url + "?" + Math.random() })
+										_react2.default.createElement(_semanticUiReact.Image, {
+											style: { "display": "block", "height": content.model.height, "width": content.model.width },
+											src: content.model.url + "?" + Math.random(),
+											alt: content.model.altText
+										})
 									)
 								);
 							case "list":
@@ -131,7 +142,7 @@ var ArticleContent = function (_React$Component) {
 								return _react2.default.createElement(
 									'p',
 									null,
-									' default '
+									' Unknown item in JSON.'
 								);
 						}
 					})

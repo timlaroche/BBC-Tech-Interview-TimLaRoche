@@ -29,7 +29,7 @@ class App extends React.Component {
 						<Container text>
 							{AppHeader}
 							<div style={{"padding": "2em"}}>
-							<p> Welcome to Tim's BBC Article Ranker. </p> 
+							<p> Welcome to the BBC Article Ranker. </p> 
 							<p>Please take your time to read the 5 articles you are presented and rank them at the end. </p>
 							</div>
 							<Button onClick={(e) => this.setState({reading: true}) }> Start </Button>
@@ -52,7 +52,6 @@ class App extends React.Component {
 		else{
 			return(
 				<ErrorBoundary>
-					<React.Fragment>
 					<Grid verticalAlign='middle' centered>
 						<Grid.Row>
 							<Grid.Column width={16}>
@@ -69,7 +68,6 @@ class App extends React.Component {
 							</Grid.Column>
 						</Grid.Row>
 					</Grid>
-					</React.Fragment>
 				</ErrorBoundary>
 			)
 		}

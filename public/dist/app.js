@@ -78,7 +78,7 @@ var App = function (_React$Component) {
 								_react2.default.createElement(
 									'p',
 									null,
-									' Welcome to Tim\'s BBC Article Ranker. '
+									' Welcome to the BBC Article Ranker. '
 								),
 								_react2.default.createElement(
 									'p',
@@ -113,41 +113,37 @@ var App = function (_React$Component) {
 						_errorboundary2.default,
 						null,
 						_react2.default.createElement(
-							_react2.default.Fragment,
-							null,
+							_semanticUiReact.Grid,
+							{ verticalAlign: 'middle', centered: true },
 							_react2.default.createElement(
-								_semanticUiReact.Grid,
-								{ verticalAlign: 'middle', centered: true },
+								_semanticUiReact.Grid.Row,
+								null,
 								_react2.default.createElement(
-									_semanticUiReact.Grid.Row,
-									null,
-									_react2.default.createElement(
-										_semanticUiReact.Grid.Column,
-										{ width: 16 },
-										AppHeader
-									)
-								),
+									_semanticUiReact.Grid.Column,
+									{ width: 16 },
+									AppHeader
+								)
+							),
+							_react2.default.createElement(
+								_semanticUiReact.Grid.Row,
+								null,
 								_react2.default.createElement(
-									_semanticUiReact.Grid.Row,
-									null,
+									_semanticUiReact.Grid.Column,
+									{ width: 8 },
+									_react2.default.createElement(_content2.default, { style: { "padding-top": "-2em" },
+										articleURL: "http://localhost:3000/article-" + this.state.currentIndex
+									}),
 									_react2.default.createElement(
-										_semanticUiReact.Grid.Column,
-										{ width: 8 },
-										_react2.default.createElement(_content2.default, { style: { "padding-top": "-2em" },
-											articleURL: "http://localhost:3000/article-" + this.state.currentIndex
-										}),
-										_react2.default.createElement(
-											_semanticUiReact.Button,
-											{ onClick: function onClick(e) {
-													return _this2.nextArticle(e);
-												} },
-											' Next Article '
-										),
-										this.state.showPrev != 0 && _react2.default.createElement(
-											'button',
-											null,
-											' Previous Article '
-										)
+										_semanticUiReact.Button,
+										{ onClick: function onClick(e) {
+												return _this2.nextArticle(e);
+											} },
+										' Next Article '
+									),
+									this.state.showPrev != 0 && _react2.default.createElement(
+										'button',
+										null,
+										' Previous Article '
 									)
 								)
 							)
