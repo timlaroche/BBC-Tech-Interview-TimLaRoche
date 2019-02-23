@@ -19,7 +19,7 @@ class App extends React.Component {
 	render(){
 		const headerStyle = {display: "block", magin: "0 auto"}
 		const AppHeader = (<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center", "padding-top": '1.5em'}}> 
-							<img src="bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
+							<img src="./public/bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
 						</Header>);
 		// Initial starting page
 		if(this.state.reading === false){
@@ -61,7 +61,7 @@ class App extends React.Component {
 						<Grid.Row>
 							<Grid.Column width={8}>
 								<ArticleContent style={{"padding-top": "-2em"}} 
-									articleURL={"http://localhost:3000/article-"+this.state.currentIndex} 
+									articleURL={"https://raw.githubusercontent.com/bbc/news-coding-test-dataset/master/data/article-"+this.state.currentIndex+".json"} 
 								/>
 								<Button onClick={(e) => this.nextArticle(e)}> Next Article </Button>
 								{this.state.showPrev != 0 && <button> Previous Article </button>}
