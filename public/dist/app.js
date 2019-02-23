@@ -57,7 +57,7 @@ var App = function (_React$Component) {
 			var AppHeader = _react2.default.createElement(
 				_semanticUiReact.Header,
 				{ as: 'h2', style: { display: "block", margin: "0 auto", "text-align": "center", "padding-top": '1.5em' } },
-				_react2.default.createElement('img', { src: './public/bbclogo.svg', alt: 'BBC', style: { "bottom": ".125em", "position": "relative" } }),
+				_react2.default.createElement('img', { src: 'public/bbclogo.svg', alt: 'BBC', style: { "bottom": ".125em", "position": "relative" } }),
 				' Article Ranker'
 			);
 			// Initial starting page

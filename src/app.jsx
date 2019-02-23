@@ -19,7 +19,7 @@ class App extends React.Component {
 	render(){
 		const headerStyle = {display: "block", magin: "0 auto"}
 		const AppHeader = (<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center", "padding-top": '1.5em'}}> 
-							<img src="./public/bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
+							<img src="public/bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
 						</Header>);
 		// Initial starting page
 		if(this.state.reading === false){
