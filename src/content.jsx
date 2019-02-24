@@ -10,8 +10,7 @@ export default class ArticleContent extends React.Component {
 			isLoaded: false,
 			title: "",
 			body: [],
-			noOfImages: 0,
-			base64image: []
+			networkError: false
 		};
 	}
 
@@ -31,10 +30,7 @@ export default class ArticleContent extends React.Component {
 		axios.get(this.props.articleURL).then((response) => {
 			this.setState({title: response.data["title"], body: response.data["body"], isLoaded: true});
 		}).catch((error) => {
-			// Catch Error Handling for Error Boundary Component.
-			//TODO: Need to set error state inside this component and render alt error if fails
-			//		since error boundary component may miss this as it not necesarilly rendering logic.
-			throw new Error("Unable to load article contents.");
+			this.setState({networkError: true});
 		});
 	}
 
@@ -82,6 +78,15 @@ export default class ArticleContent extends React.Component {
 					}
 				})}
 				</div>
+			)
+		}
+		else if(this.state.networkError){
+			return(
+				<React.Fragment>
+					<Container text>
+						<h2> Network Error. Unable to retrieve article. </h2>
+					</Container>
+				</React.Fragment>
 			)
 		}
 		else{

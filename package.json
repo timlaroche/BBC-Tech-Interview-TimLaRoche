@@ -4,7 +4,9 @@
   "description": "BBC Software Engineering Techincal Interview",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build windows": "npx babel src --out-dir ./dist --presets react-app/prod; webpack",
+    "build mac": "npx babel src --out-dir ./dist --presets react-app/prod && webpack"
   },
   "author": "Tim La Roche",
   "license": "ISC",
