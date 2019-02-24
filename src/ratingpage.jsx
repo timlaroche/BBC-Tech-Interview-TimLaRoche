@@ -57,7 +57,7 @@ export default class RatingPage extends React.Component {
 				<React.Fragment>
 					<Container text>
 						<h1>Thank you for reading the articles and submitting your ranking.</h1>
-						<h2>Please view the developer console if you would to see the submitted ranking.</h2>
+						<h2>Please view the developer console if you would like to see the submitted ranking.</h2>
 					</Container>
 				</React.Fragment>
 			)

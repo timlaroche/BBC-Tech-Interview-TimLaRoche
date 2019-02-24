@@ -36,8 +36,7 @@ var ArticleContent = function (_React$Component) {
 			isLoaded: false,
 			title: "",
 			body: [],
-			noOfImages: 0,
-			base64image: []
+			networkError: false
 		};
 		return _this;
 	}
@@ -64,10 +63,7 @@ var ArticleContent = function (_React$Component) {
 			_axios2.default.get(this.props.articleURL).then(function (response) {
 				_this2.setState({ title: response.data["title"], body: response.data["body"], isLoaded: true });
 			}).catch(function (error) {
-				// Catch Error Handling for Error Boundary Component.
-				//TODO: Need to set error state inside this component and render alt error if fails
-				//		since error boundary component may miss this as it not necesarilly rendering logic.
-				throw new Error("Unable to load article contents.");
+				_this2.setState({ networkError: true });
 			});
 		}
 	}, {
@@ -148,6 +144,20 @@ var ArticleContent = function (_React$Component) {
 								);
 						}
 					})
+				);
+			} else if (this.state.networkError) {
+				return _react2.default.createElement(
+					_react2.default.Fragment,
+					null,
+					_react2.default.createElement(
+						_semanticUiReact.Container,
+						{ text: true },
+						_react2.default.createElement(
+							'h2',
+							null,
+							' Network Error. Unable to retrieve article. '
+						)
+					)
 				);
 			} else {
 				return _react2.default.createElement(

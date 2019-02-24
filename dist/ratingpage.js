@@ -102,7 +102,7 @@ var RatingPage = function (_React$Component) {
 						_react2.default.createElement(
 							'h2',
 							null,
-							'Please view the developer console if you would to see the submitted ranking.'
+							'Please view the developer console if you would like to see the submitted ranking.'
 						)
 					)
 				);
