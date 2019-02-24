@@ -32,6 +32,8 @@ export default class ArticleContent extends React.Component {
 			this.setState({title: response.data["title"], body: response.data["body"], isLoaded: true});
 		}).catch((error) => {
 			// Catch Error Handling for Error Boundary Component.
+			//TODO: Need to set error state inside this component and render alt error if fails
+			//		since error boundary component may miss this as it not necesarilly rendering logic.
 			throw new Error("Unable to load article contents.");
 		});
 	}

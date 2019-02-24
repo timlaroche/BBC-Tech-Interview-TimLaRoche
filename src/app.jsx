@@ -17,9 +17,11 @@ class App extends React.Component {
 	}
 
 	render(){
+		// TODO: Move some of the Containers etc into the components to reduce this render method down to
+		//		 just the core components.
 		const headerStyle = {display: "block", magin: "0 auto"}
 		const AppHeader = (<Header as="h2" style={{display: "block", margin: "0 auto", "text-align": "center", "padding-top": '1.5em'}}> 
-							<img src="public/bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
+							<img src="./public/bbclogo.svg" alt="BBC" style={{"bottom": ".125em", "position": "relative"}}/> Article Ranker 
 						</Header>);
 		// Initial starting page
 		if(this.state.reading === false){
@@ -75,7 +77,6 @@ class App extends React.Component {
 
 	nextArticle(e){
 		e.preventDefault();
-		console.log("button press");
 		// The commented line of code below is used if you would like to circularly view the articles i.e. after Article 5, read Article 1.
 		//this.setState({currentIndex: (this.state.currentIndex % 5) + 1});
 		//Otherwise below...

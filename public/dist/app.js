@@ -53,11 +53,13 @@ var App = function (_React$Component) {
 		value: function render() {
 			var _this2 = this;
 
+			// TODO: Move some of the Containers etc into the components to reduce this render method down to
+			//		 just the core components.
 			var headerStyle = { display: "block", magin: "0 auto" };
 			var AppHeader = _react2.default.createElement(
 				_semanticUiReact.Header,
 				{ as: 'h2', style: { display: "block", margin: "0 auto", "text-align": "center", "padding-top": '1.5em' } },
-				_react2.default.createElement('img', { src: 'public/bbclogo.svg', alt: 'BBC', style: { "bottom": ".125em", "position": "relative" } }),
+				_react2.default.createElement('img', { src: './public/bbclogo.svg', alt: 'BBC', style: { "bottom": ".125em", "position": "relative" } }),
 				' Article Ranker'
 			);
 			// Initial starting page
@@ -155,7 +157,6 @@ var App = function (_React$Component) {
 		key: 'nextArticle',
 		value: function nextArticle(e) {
 			e.preventDefault();
-			console.log("button press");
 			// The commented line of code below is used if you would like to circularly view the articles i.e. after Article 5, read Article 1.
 			//this.setState({currentIndex: (this.state.currentIndex % 5) + 1});
 			//Otherwise below...

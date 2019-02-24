@@ -8,7 +8,12 @@ export default class Rating extends React.Component{
 		this.state = {value: 1};
 	}
 
-	handleChange = (e, { value }) => this.setState({ value })
+	handleChange = (e, { value }) => {
+		this.setState({ value }, function(){
+			//Callback to make sure state is updated before we update the rating.
+			this.props.updateRating(this.props.articleNo, this.state.value);
+		});
+	}
 
 	render(){
 		return(
@@ -21,7 +26,7 @@ export default class Rating extends React.Component{
 						<Radio 
 						label="1" 
 						name="radioGroup" 
-						value="1" 
+						value={1}
 						checked={this.state.value == 1} 
 						onChange={this.handleChange} 
 						defaultChecked
@@ -31,7 +36,7 @@ export default class Rating extends React.Component{
 						<Radio 
 						label="2" 
 						name="radioGroup" 
-						value="2" 
+						value={2}
 						checked={this.state.value == 2} 
 						onChange={this.handleChange} 
 						/>
@@ -40,7 +45,7 @@ export default class Rating extends React.Component{
 						<Radio 
 						label="3" 
 						name="radioGroup" 
-						value="3" 
+						value={3} 
 						checked={this.state.value == 3} 
 						onChange={this.handleChange} 
 						/>
@@ -49,7 +54,7 @@ export default class Rating extends React.Component{
 						<Radio 
 						label="4" 
 						name="radioGroup" 
-						value="4" 
+						value={4} 
 						checked={this.state.value == 4} 
 						onChange={this.handleChange} 
 						/>
@@ -58,7 +63,7 @@ export default class Rating extends React.Component{
 						<Radio 
 						label="5" 
 						name="radioGroup" 
-						value="5" 
+						value={5}
 						checked={this.state.value == 5} 
 						onChange={this.handleChange} 
 						/>
