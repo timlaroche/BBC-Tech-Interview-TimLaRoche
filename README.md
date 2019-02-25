@@ -1,6 +1,6 @@
 # BBC Tech Interview - Front End Articles Website by Tim La Roche
 
-Articles website written for the BBC Software Engineering technical interview by Tim La Roche.
+Articles website written for the BBC Software Engineering technical interview by Tim La Roche. I wish to be considered for all 3 possible teams (Web, Backend and Apps). My preference is for the Web with Backend.
 
 ## Intro and Overview
 In this repo I present my web app for evaluation with regard to the Software Engineering placement role at the BBC. [You can visit the website here.](https://timlaroche.github.io/BBC-Tech-Interview-TimLaRoche/)
